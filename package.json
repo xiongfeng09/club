@@ -19,7 +19,7 @@
     "mongoose": "3.8.16",
     "nodemailer": "0.3.43",
     "passport": "~0.1.17",
-    "passport-github": "~0.1.5"
+    "passport-github": "~0.1.5",
 
     "connect-busboy": "0.0.1",
     "csurf": "^1.1.0",
