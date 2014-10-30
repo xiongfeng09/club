@@ -199,11 +199,12 @@ exports.reduceCount = function (id, callback) {
   });
 };
 
-exports.newAndSave = function (title, content, tab, authorId, callback) {
+exports.newAndSave = function (title, content, tab, categories, authorId, callback) {
   var topic = new Topic();
   topic.title = title;
   topic.content = content;
   topic.tab = tab;
+  topic.categories = categories;
   topic.author_id = authorId;
   topic.save(callback);
 };

@@ -46,6 +46,23 @@
 
               <%});%>
             </select>
+            <br />
+             标签：
+            <%
+              if ((typeof(categories) !== 'undefined' && categories)) {
+                console.log(categories)
+                categories.forEach(function (category) {
+                  %>
+                    <input type="text" name="category" value="<%=category%>" />
+                  <%
+                });
+              } else {
+                %>
+                  <input type="text" name="category" />
+                  <input type="text" name="category" />
+                <%
+              }
+            %>
             <textarea autofocus class='span9' id='title' name='title' rows='1'
                       placeholder="标题字数 10 字以上"
                     ><%= typeof(title) !== 'undefined' && title || '' %></textarea>

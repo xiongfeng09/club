@@ -119,7 +119,7 @@ exports.put = function (req, res, next) {
   var tab = validator.trim(req.body.tab);
   tab = validator.escape(tab);
   var content = req.body.t_content;
-
+  var categories = req.body.category;
   // 验证
   var editError;
   if (title === '') {
@@ -136,11 +136,12 @@ exports.put = function (req, res, next) {
       edit_error: editError,
       title: title,
       content: content,
-      tabs: config.tabs
+      tabs: config.tabs,
+      categories: categories
     });
   }
 
-  Topic.newAndSave(title, content, tab, req.session.user._id, function (err, topic) {
+  Topic.newAndSave(title, content, tab, categories, req.session.user._id, function (err, topic) {
     if (err) {
       return next(err);
     }
@@ -188,7 +189,8 @@ exports.showEdit = function (req, res, next) {
         title: topic.title,
         content: topic.content,
         tab: topic.tab,
-        tabs: config.tabs
+        tabs: config.tabs,
+        categories: topic.categories
       });
     } else {
       res.render('notify/notify', {error: '对不起，你不能编辑此话题。'});
@@ -219,6 +221,7 @@ exports.update = function (req, res, next) {
       var tab = validator.trim(req.body.tab);
       tab = validator.escape(tab);
       var content = req.body.t_content;
+      var categories = req.body.category;
 
       // 验证
       var editError;
@@ -237,7 +240,8 @@ exports.update = function (req, res, next) {
           edit_error: editError,
           topic_id: topic._id,
           content: content,
-          tabs: config.tabs
+          tabs: config.tabs,
+          categories: categories
         });
       }
 
@@ -247,6 +251,7 @@ exports.update = function (req, res, next) {
       topic.title = title;
       topic.content = content;
       topic.tab = tab;
+      topic.categories = categories;
       topic.update_at = new Date();
       topic.save(function (err) {
         if (err) {
