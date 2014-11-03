@@ -1,5 +1,5 @@
 /*!
- * nodeclub - app.js
+ * devLife - app.js
  */
 
 /**
@@ -130,7 +130,7 @@ if (config.debug) {
 }
 
 app.listen(config.port, function () {
-  console.log("NodeClub listening on port %d in %s mode", config.port, app.settings.env);
+  console.log("devLife listening on port %d in %s mode", config.port, app.settings.env);
   console.log("God bless love....");
   console.log("You can debug your app with http://" + config.hostname + ':' + config.port);
 });
