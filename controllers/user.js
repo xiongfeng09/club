@@ -408,36 +408,38 @@ exports.list_topics = function (req, res, next) {
       res.render('notify/notify', {error: '这个用户不存在。'});
       return;
     }
+    Topic.getTabs(function(err, tabs){
+      console.log(tabs)
+      var render = function (topics, relation, pages) {
+        user.friendly_create_at = tools.formatDate(user.create_at, true);
+        res.render('user/topics', {
+          user: user,
+          topics: topics,
+          relation: relation,
+          current_page: page,
+          pages: pages
+        });
+      };
 
-    var render = function (topics, relation, pages) {
-      user.friendly_create_at = tools.formatDate(user.create_at, true);
-      res.render('user/topics', {
-        user: user,
-        topics: topics,
-        relation: relation,
-        current_page: page,
-        pages: pages
-      });
-    };
+      var proxy = new EventProxy();
+      proxy.assign('topics', 'relation', 'pages', render);
+      proxy.fail(next);
 
-    var proxy = new EventProxy();
-    proxy.assign('topics', 'relation', 'pages', render);
-    proxy.fail(next);
+      var query = {'author_id': user._id};
+      var opt = {skip: (page - 1) * limit, limit: limit, sort: '-create_at'};
+      Topic.getTopicsByQuery(query, opt, proxy.done('topics'));
 
-    var query = {'author_id': user._id};
-    var opt = {skip: (page - 1) * limit, limit: limit, sort: '-create_at'};
-    Topic.getTopicsByQuery(query, opt, proxy.done('topics'));
+      if (!req.session.user) {
+        proxy.emit('relation', null);
+      } else {
+        Relation.getRelation(req.session.user._id, user._id, proxy.done('relation'));
+      }
 
-    if (!req.session.user) {
-      proxy.emit('relation', null);
-    } else {
-      Relation.getRelation(req.session.user._id, user._id, proxy.done('relation'));
-    }
-
-    Topic.getCountByQuery(query, proxy.done(function (all_topics_count) {
-      var pages = Math.ceil(all_topics_count / limit);
-      proxy.emit('pages', pages);
-    }));
+      Topic.getCountByQuery(query, proxy.done(function (all_topics_count) {
+        var pages = Math.ceil(all_topics_count / limit);
+        proxy.emit('pages', pages);
+      }));
+    })
   });
 };
 

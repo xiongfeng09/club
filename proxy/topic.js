@@ -207,3 +207,8 @@ exports.newAndSave = function (title, content, tab, authorId, callback) {
   topic.author_id = authorId;
   topic.save(callback);
 };
+
+exports.getTabs = function (callback) {
+  Topic.distinct('tab', callback)
+};
+

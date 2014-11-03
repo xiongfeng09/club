@@ -57,7 +57,6 @@ exports.index = function (req, res, next) {
         no_reply_topics: no_reply_topics,
         pages: pages,
         site_links: config.site_links,
-        tabs: config.tabs,
         tab: tab,
         pageTitle: tabName && (tabName + '版块'),
       });
