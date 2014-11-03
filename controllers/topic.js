@@ -119,16 +119,14 @@ exports.put = function (req, res, next) {
   var tab = validator.trim(req.body.tab);
   tab = validator.escape(tab);
   var content = req.body.t_content;
-  var categories = req.body.category;
   // 验证
   var editError;
   if (title === '') {
     editError = '标题不能是空的。';
   } else if (title.length < 5 && title.length > 100) {
     editError = '标题字数太多或太少。';
-  } else if (!tab || allTabs.indexOf(tab) === -1) {
-    editError = '必须选择一个版块。';
   }
+
   // END 验证
 
   if (editError) {
@@ -136,12 +134,11 @@ exports.put = function (req, res, next) {
       edit_error: editError,
       title: title,
       content: content,
-      tabs: config.tabs,
-      categories: categories
+      tabs: config.tabs
     });
   }
 
-  Topic.newAndSave(title, content, tab, categories, req.session.user._id, function (err, topic) {
+  Topic.newAndSave(title, content, tab, req.session.user._id, function (err, topic) {
     if (err) {
       return next(err);
     }
@@ -189,8 +186,7 @@ exports.showEdit = function (req, res, next) {
         title: topic.title,
         content: topic.content,
         tab: topic.tab,
-        tabs: config.tabs,
-        categories: topic.categories
+        tabs: config.tabs
       });
     } else {
       res.render('notify/notify', {error: '对不起，你不能编辑此话题。'});
@@ -221,7 +217,6 @@ exports.update = function (req, res, next) {
       var tab = validator.trim(req.body.tab);
       tab = validator.escape(tab);
       var content = req.body.t_content;
-      var categories = req.body.category;
 
       // 验证
       var editError;
@@ -240,8 +235,7 @@ exports.update = function (req, res, next) {
           edit_error: editError,
           topic_id: topic._id,
           content: content,
-          tabs: config.tabs,
-          categories: categories
+          tabs: config.tabs
         });
       }
 
@@ -251,7 +245,6 @@ exports.update = function (req, res, next) {
       topic.title = title;
       topic.content = content;
       topic.tab = tab;
-      topic.categories = categories;
       topic.update_at = new Date();
       topic.save(function (err) {
         if (err) {

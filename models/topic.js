@@ -18,8 +18,7 @@ var TopicSchema = new Schema({
   last_reply: { type: ObjectId },
   last_reply_at: { type: Date, default: Date.now },
   content_is_html: { type: Boolean },
-  tab: {type: String},
-  categories: {type: [String]}
+  tab: {type: String}
 });
 
 TopicSchema.index({create_at: -1});
