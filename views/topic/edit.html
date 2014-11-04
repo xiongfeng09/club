@@ -6,9 +6,9 @@
       <ol class='breadcrumb'>
         <li><a href='/'>主页</a><span class='divider'>/</span></li>
         <% if(typeof(action) !== 'undefined' && action == 'edit'){ %>
-        <li class='active'>编辑话题</li>
+        <li class='active'>编辑文章</li>
         <% }else{ %>
-        <li class='active'>发布话题</li>
+        <li class='active'>发布文章</li>
         <% } %>
       </ol>
     </div>
@@ -30,8 +30,11 @@
         <form id='create_topic_form' action='/topic/create' method='post'>
           <% } %>
           <fieldset>
-            <span class="tab-selector">选择分类：</span>
-            <input type="text" name="tab" id="tab-value"/>
+            <span class="tab-selector">分类：</span>
+            <input type="text" name="tab" placeholder="文章分类"
+            id="tab-value" value="<%=(typeof(tab) === 'undefined') ? "" : tab %>"/>
+            <br/>
+            <span class="tab-selector">标题：</span>
             <textarea autofocus class='span9' id='title' name='title' rows='1'
                       placeholder="标题字数 10 字以上"
                     ><%= typeof(title) !== 'undefined' && title || '' %></textarea>

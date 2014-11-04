@@ -6,7 +6,7 @@
       <ul class='breadcrumb'>
         <% ['全部'].concat(tabs).forEach(function (tab) { %>
           <li><a href="/user/<%=user.loginname%>/topics<%=(tab == '全部') ? '' : '?tab=' + tab%>"
-            class="topictab <%= tab == currentTab ? 'current-tab' : '' %>"
+            class="topictab<%= (tab === currentTab || typeof(currentTab) === 'undefined') ? ' current-tab' : '' %>"
           ><%= tab %>
           </a></li>
         <% }) %>
