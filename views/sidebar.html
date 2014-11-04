@@ -33,47 +33,4 @@
     </div>
   </div>
   <% } %>
-
-  <% if (typeof(current_user) === 'undefined' || !current_user.isAdvanced) { %>
-    <%- partial('./_ads') %>
-  <% } %>
-
-  <% if (typeof(tops) !== 'undefined') { %>
-  <div class='panel'>
-    <div class='header'>
-      <span class='col_fade'>积分榜</span>
-      &nbsp;
-      <a class='dark' href='/users/top100'>TOP 100 &gt;&gt;</a>
-    </div>
-    <div class='inner'>
-      <% if (tops.length > 0) { %>
-      <ol>
-        <%- partial('user/top', { collection: tops, as: 'user' }) %>
-      </ol>
-      <% } else { %>
-      <p>无</p>
-      <% } %>
-    </div>
-  </div>
-  <% } %>
-
-  <% if (typeof(site_links) !== 'undefined') { %>
-  <div class='panel'>
-    <div class='header'>
-      <span class='col_fade'>友情链接</span>
-    </div>
-    <div class='inner'>
-      <% if (site_links.length > 0) { %>
-      <ol>
-        <%site_links.forEach(function (link) {%>
-        <li><a href="<%-link.url%>"><%-link.text%></a></li>
-        <%})%>
-      </ol>
-      <% } else { %>
-      <p>无</p>
-      <% } %>
-    </div>
-  </div>
-  <% } %>
-
 </div>
