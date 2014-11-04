@@ -208,7 +208,17 @@ exports.newAndSave = function (title, content, tab, authorId, callback) {
   topic.save(callback);
 };
 
-exports.getTabs = function (callback) {
-  Topic.distinct('tab', callback)
+exports.getTabs = function (authorId, callback) {
+  Topic.distinct('tab', { 'author_id': authorId }, function(err, tabs) {
+    if (err) {
+      return callback(err);
+    }
+    callback(
+      null,
+      tabs.filter(function(e) {
+        return !!e;
+      })
+    )
+  });
 };
 

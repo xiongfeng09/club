@@ -9,12 +9,23 @@
       </ul>
     </div>
   </div>
+  <div class="panel">
+    <% ['全部'].concat(tabs).forEach(function (tab) { %>
+    <a href="/user/<%=user.loginname%>/topics<%=(tab == '全部') ? '' : '?tab=' + tab%>"
+      class="topictab <%= tab == currentTab ? 'current-tab' : '' %>"
+    ><%= tab %>
+    </a>
+    <% }) %>
+  </div>
   <div class='panel'>
-    <div class="header"><%=user.loginname%> 创建的话题</div>
     <% if(typeof(topics) !== 'undefined' && topics.length > 0 ){ %>
-    <%- partial('../topic/list',
-    {topics:topics,pages:pages,current_pages:current_page,base:'/user/'+user.loginname+'/topics'}) %>
-    <% }else{ %>
+      <%- partial('../topic/list', {
+        topics: topics,
+        pages: pages,
+        current_page: current_page,
+        base: '/user/'+user.loginname+'/topics'
+      }) %>
+    <%}else{ %>
     <div class='inner'>
       <p>无话题</p>
     </div>

@@ -402,44 +402,44 @@ exports.list_topics = function (req, res, next) {
   var user_name = req.params.name;
   var page = Number(req.query.page) || 1;
   var limit = config.list_topic_count;
-
+  var tab = req.query.tab
   User.getUserByLoginName(user_name, function (err, user) {
     if (!user) {
       res.render('notify/notify', {error: '这个用户不存在。'});
       return;
     }
-    Topic.getTabs(function(err, tabs){
-      console.log(tabs)
-      var render = function (topics, relation, pages) {
-        user.friendly_create_at = tools.formatDate(user.create_at, true);
-        res.render('user/topics', {
-          user: user,
-          topics: topics,
-          relation: relation,
-          current_page: page,
-          pages: pages
-        });
-      };
+    var render = function (topics, relation, tabs, pages) {
+      user.friendly_create_at = tools.formatDate(user.create_at, true);
+      res.render('user/topics', {
+        user: user,
+        topics: topics,
+        relation: relation,
+        tabs: tabs,
+        currentTab: tab,
+        current_page: page,
+        pages: pages
+      });
+    };
 
-      var proxy = new EventProxy();
-      proxy.assign('topics', 'relation', 'pages', render);
-      proxy.fail(next);
+    var proxy = new EventProxy();
+    proxy.assign('topics', 'relation', 'tabs', 'pages', render);
+    proxy.fail(next);
+    var query = tab ? {'author_id': user._id, 'tab': tab } : {'author_id': user._id };
+    var opt = {skip: (page - 1) * limit, limit: limit, sort: '-create_at'};
+    Topic.getTopicsByQuery(query, opt, proxy.done('topics'));
+    if (!req.session.user) {
+      proxy.emit('relation', null);
+    } else {
+      Relation.getRelation(req.session.user._id, user._id, proxy.done('relation'));
+    }
+    
+    Topic.getTabs(user._id, proxy.done('tabs'));
 
-      var query = {'author_id': user._id};
-      var opt = {skip: (page - 1) * limit, limit: limit, sort: '-create_at'};
-      Topic.getTopicsByQuery(query, opt, proxy.done('topics'));
 
-      if (!req.session.user) {
-        proxy.emit('relation', null);
-      } else {
-        Relation.getRelation(req.session.user._id, user._id, proxy.done('relation'));
-      }
-
-      Topic.getCountByQuery(query, proxy.done(function (all_topics_count) {
-        var pages = Math.ceil(all_topics_count / limit);
-        proxy.emit('pages', pages);
-      }));
-    })
+    Topic.getCountByQuery(query, proxy.done(function (all_topics_count) {
+      var pages = Math.ceil(all_topics_count / limit);
+      proxy.emit('pages', pages);
+    }));
   });
 };
 
