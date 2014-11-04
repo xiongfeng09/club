@@ -80,14 +80,8 @@
             </a>
         </li>
         <% } %>
-        <%
-        var site_navs = config.site_navs || [];
-        for (var i = 0, l = site_navs.length; i < l; i++) {
-        var nav = site_navs[i];
-        %>
-        <li><a href="<%- nav[0] %>" target="<%- nav[2] %>"><%- nav[1] %></a></li>
-        <% } %>
         <% if (typeof(current_user) !== 'undefined') { %>
+        <li><a href="/user/<%=current_user.loginname%>/topics">我的文章</a></li>
         <li><a href='/setting'>设置</a></li>
         <li>
           <a href='/signout' data-method="post" rel="nofollow">退出</a>
