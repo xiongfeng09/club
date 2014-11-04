@@ -81,7 +81,7 @@ app.use('/public', express.static(staticDir));
 
 if (!config.debug) {
   app.use(csurf());
-  app.set('view cache', true);
+  app.set('view cache', false);
 }
 
 // for debug
