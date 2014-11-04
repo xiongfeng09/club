@@ -62,15 +62,12 @@
     <div class='container'>
       <a class='brand' href='/'>
         <% if (config.site_logo) {%>
-          <img src="<%- staticFile(config.site_logo) %>" />
+          <!-- <img src="<%- staticFile(config.site_logo) %>" /> -->
         <%} else {%>
           <%- config.name %>
         <%}%>
       </a>
 
-      <form id='search_form' class='navbar-search' action="/search">
-        <input type='text' id='q' name='q' class='search-query span3' value=''/>
-      </form>
       <ul class='nav pull-right'>
         <li><a href='/'>首页</a></li>
         <% if (typeof(current_user) !== 'undefined'){ %>
