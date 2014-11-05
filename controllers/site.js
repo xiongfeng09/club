@@ -28,7 +28,7 @@ setInterval(function () {
     mcache.put(optionsStr, topics);
     return topics;
   });
-}, 1000 * 5); // 五秒更新一次
+}, 1000 * 120); // 五秒更新一次
 // END 主页的缓存工作
 
 exports.index = function (req, res, next) {
@@ -37,7 +37,7 @@ exports.index = function (req, res, next) {
   var limit = config.list_topic_count;
 
   var proxy = eventproxy.create('topics', 'pages',
-    function (topics, tops, pages) {
+    function (topics, pages) {
       res.render('index', {
         topics: topics,
         current_page: page,
