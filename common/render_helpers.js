@@ -51,11 +51,3 @@ exports.staticFile = function (filePath) {
   return config.site_static_host + filePath;
 };
 
-exports.tabName = function (tab) {
-  var pair = _.find(config.tabs, function (pair) {
-    return pair[0] === tab;
-  });
-  if (pair) {
-    return pair[1];
-  }
-};
