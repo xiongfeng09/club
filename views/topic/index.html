@@ -28,7 +28,7 @@
           发布于 <%= topic.friendly_create_at %>
         </span>
         <span>
-          作者 <a href="/user/<%= topic.author.name %>"><%= topic.author.name %></a>
+          作者 <a href="/user/<%= topic.author.name %>/topics"><%= topic.author.name %></a>
         </span>
         <span>
           <%= topic.visit_count %> 次浏览
@@ -131,18 +131,14 @@
     </div>
     <div class='inner reply'>
       <form id='reply_form' action='/<%= topic._id %>/reply' method='post'>
-
         <div class='markdown_editor in_editor'>
           <div class='markdown_in_editor'>
             <textarea class='editor' name='r_content' rows='8'></textarea>
-
             <div class='editor_buttons'>
               <input class='span-primary submit_btn' type="submit" data-loading-text="回复中.." value="回复">
             </div>
           </div>
-
         </div>
-
         <input type='hidden' name='_csrf' id="_csrf" value='<%= csrf %>'/>
       </form>
     </div>
