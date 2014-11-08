@@ -15,59 +15,41 @@ var config = require('../config');
 var eventproxy = require('eventproxy');
 var mcache = require('memory-cache');
 var xmlbuilder = require('xmlbuilder');
-var renderHelpers = require('../common/render_helpers');
 
 // 主页的缓存工作。主页是需要主动缓存的
 setInterval(function () {
   var limit = config.list_topic_count;
-  // 为所有版块（tab）做缓存
-  [['', '全部']].concat(config.tabs).forEach(function (pair) {
-    // 只缓存第一页, page = 1。options 之所以每次都生成是因为 mongoose 查询时，
-    // 会改动它
-    var options = { skip: (1 - 1) * limit, limit: limit, sort: '-top -last_reply_at'};
-    var tabValue = pair[0];
-    var query = {};
-    if (tabValue) {
-      query.tab = tabValue;
-    }
-    var optionsStr = JSON.stringify(query) + JSON.stringify(options);
-    Topic.getTopicsByQuery(query, options, function (err, topics) {
-      mcache.put(optionsStr, topics);
-      return topics;
-    });
+  // 只缓存第一页, page = 1。options 之所以每次都生成是因为 mongoose 查询时，
+  // 会改动它
+  var query = {};
+  var options = { skip: (1 - 1) * limit, limit: limit, sort: '-top -last_reply_at'};
+  var optionsStr = JSON.stringify(query) + JSON.stringify(options);
+  Topic.getTopicsByQuery(query, options, function (err, topics) {
+    mcache.put(optionsStr, topics);
+    return topics;
   });
-}, 1000 * 5); // 五秒更新一次
+}, 1000 * 120); // 五秒更新一次
 // END 主页的缓存工作
 
 exports.index = function (req, res, next) {
   var page = parseInt(req.query.page, 10) || 1;
   page = page > 0 ? page : 1;
-  var tab = req.query.tab || req.session.tab || 'all';
-  req.session.tab = tab;
   var limit = config.list_topic_count;
 
-  var tabName = renderHelpers.tabName(tab);
-  var proxy = eventproxy.create('topics', 'tops', 'no_reply_topics', 'pages',
-    function (topics, tops, no_reply_topics, pages) {
+  var proxy = eventproxy.create('topics', 'pages',
+    function (topics, pages) {
       res.render('index', {
         topics: topics,
         current_page: page,
         list_topic_count: limit,
-        tops: tops,
-        no_reply_topics: no_reply_topics,
         pages: pages,
-        site_links: config.site_links,
-        tab: tab,
-        pageTitle: tabName && (tabName + '版块'),
+        site_links: config.site_links
       });
     });
   proxy.fail(next);
 
   // 取主题
   var query = {};
-  if (tab && tab !== 'all') {
-    query.tab = tab;
-  }
   var options = { skip: (page - 1) * limit, limit: limit, sort: '-top -last_reply_at'};
   var optionsStr = JSON.stringify(query) + JSON.stringify(options);
   if (mcache.get(optionsStr)) {
@@ -79,34 +61,6 @@ exports.index = function (req, res, next) {
   }
   // END 取主题
 
-  // 取排行榜上的用户
-  if (mcache.get('tops')) {
-    proxy.emit('tops', mcache.get('tops'));
-  } else {
-    User.getUsersByQuery(
-      {'$or': [
-        {is_block: {'$exists': false}},
-        {is_block: false}
-      ]},
-      { limit: 10, sort: '-score'},
-      proxy.done('tops', function (tops) {
-        mcache.put('tops', tops, 1000 * 60 * 1);
-        return tops;
-      })
-    );
-  }
-  // 取0回复的主题
-  if (mcache.get('no_reply_topics')) {
-    proxy.emit('no_reply_topics', mcache.get('no_reply_topics'));
-  } else {
-    Topic.getTopicsByQuery(
-      { reply_count: 0 },
-      { limit: 5, sort: '-create_at'},
-      proxy.done('no_reply_topics', function (no_reply_topics) {
-        mcache.put('no_reply_topics', no_reply_topics, 1000 * 60 * 1);
-        return no_reply_topics;
-      }));
-  }
   // 取分页数据
   if (mcache.get('pages')) {
     proxy.emit('pages', mcache.get('pages'));

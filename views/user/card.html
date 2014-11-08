@@ -1,9 +1,9 @@
 <div class='user_card'>
   <div>
-    <a class='user_avatar' href="/user/<%= user.loginname %>">
+    <a class='user_avatar' href="/user/<%= user.loginname %>/topics">
       <img src="<%= user.avatar_url %>" title="<%= user.loginname %>"/>
     </a>
-    <span class='user_name'><a class='dark' href="/user/<%= user.loginname %>"><%= user.loginname %></a></span>
+    <span class='user_name'><a class='dark' href="/user/<%= user.loginname %>/topics"><%= user.loginname %></a></span>
 
     <% if (typeof(current_user) !== 'undefined' && current_user._id != user._id) { %>
     <div class="board clearfix">
