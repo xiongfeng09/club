@@ -1,17 +1,8 @@
-<%- partial('../sidebar') %>
+<%- partial('../tags',{tabs: tabs}) %>
 
 <div id='content'>
-  <div class='panel'>
-    <div class='header'>
-      <ul class='breadcrumb'>
-        <% ['全部'].concat(tabs).forEach(function (tab) { %>
-          <li><a href="/user/<%=user.loginname%>/topics<%=(tab == '全部') ? '' : '?tab=' + tab%>"
-            class="topictab<%= (tab === currentTab || typeof(currentTab) === 'undefined') ? ' current-tab' : '' %>"
-          ><%= tab %>
-          </a></li>
-        <% }) %>
-      </ul>
-    </div>
+  <div class='t-h3'>
+    <%= (typeof(currentTab) !== 'undefined') ? currentTab : "全部" %>
   </div>
   <div class='panel'>
     <% if(typeof(topics) !== 'undefined' && topics.length > 0 ){ %>

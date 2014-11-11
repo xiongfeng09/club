@@ -8,6 +8,10 @@
 body {
   background-color: @gray1;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
 
 #main {
   width: 1000px;
@@ -20,6 +24,7 @@ body {
 
 #topic_list {
   margin: 0;
+  min-height: 400px;
 
   .cell:hover {
     background: @main_background;
@@ -1219,4 +1224,63 @@ textarea.editor {
 
 .btn-info {
   color: white !important;
+}
+
+
+#tags {
+  float: left;
+  margin: 10px 0 20px 10px;
+}
+
+.side-container-hx {
+  width: 280px;
+  margin-right: 30px;
+}
+
+.t-h2 {
+  height: 32px;
+  line-height: 32px;
+  background-color: #555;
+  padding: 0 12px;
+  position: relative;
+  font-size: 12px;
+}
+.t-h3 {
+  height: 32px;
+  line-height: 32px;
+  padding: 15px 10px 0;
+  font-size: 14px;
+  margin-left:15px;
+}
+
+.t-h2 .more {
+  font-size: 12px;
+  color: #fff;
+  font-style: normal;
+}
+
+ul.inline>li, ol.inline>li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.tags-list li {
+  list-style-type: none;
+  float: left;
+  margin: 0 6px 12px 0;
+  height: 26px;
+  line-height: 22px;
+  overflow: hidden;
+  display: inline;
+  zoom: 1;
+  color: #999;
+  background-color: #39f;
+  box-shadow: 2px 2px 1px #ddd;
+}
+
+.tags-list li a {
+  margin: 0 5px;
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
 }
