@@ -1,7 +1,8 @@
-@gray1: #e1e1e1;
+@gray1: #f0f0f0;
 @gray2: #f6f6f6;
 @node_green: #80bd01;
 @node_black: #2d2d2d;
+@main_background: #f5f5f5;
 
 /* base */
 body {
@@ -10,17 +11,18 @@ body {
 
 #main {
   width: 1000px;
-  margin: 15px auto;
+  margin: 0 auto;
   min-height: 400px;
   position: relative;
   box-shadow: 2px 0 5px rgba(214, 214, 215, 0.9), -2px 0 5px rgba(214, 214, 215, 0.9);
+  background-color: #FAFAFC;
 }
 
 #topic_list {
   margin: 0;
 
   .cell:hover {
-    background: #f5f5f5;
+    background: @main_background;
   }
 }
 
@@ -28,6 +30,7 @@ body {
   padding: 0;
   margin-left: 305px;
 }
+
 #content-middle {
   padding: 0;
   margin: 0 auto;
@@ -788,7 +791,6 @@ textarea#title {
   box-shadow: none;
   width: 1000px;
   margin: auto;
-  padding: 5px;
 }
 
 .navbar .container {
@@ -796,34 +798,33 @@ textarea#title {
   margin: 0px auto;
 }
 
-.navbar .brand {
-  padding: 4px 0px 0px 20px;
-  width: 120px;
-  padding: 3px 20px;
+.navbar .logo {
+  float: left;
+  position: absolute;
+  margin: 0 0 0 -17px;
+  padding: 0 17px;
+  background: url(../images/logo_bg.png) no-repeat center bottom;
 }
 
-.navbar .navbar-search {
-  margin-top: 6px;
+.side-menu-top {
+  width:1000px;
+  height:62px;
+  margin: 0 auto;
 }
-
-.navbar .search-query {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  background: #888 url('../images/search.png') no-repeat 4px 4px;
-  padding: 3px 5px 3px 22px;
-  color: #666;
-  border: 0px;
-  margin-top: 2px;
-
-  &:hover {
-    background-color: white;
-  }
-  transition: all 0.5s;
-
-  &:focus, &.focused {
-    background-color: white;
-  }
+.side-menu-top h1,.side-menu-top ul,.side-menu-top li {margin:0;padding:0;list-style:none;}
+.side-menu-top .side-menu-list {
+  overflow:hidden;
+  display:block;
+  float:left;
+  height:28px;
+  margin-top:10px;
+  padding-left:130px;
 }
+.side-menu-list li {text-align:center;float:left;width:74px;height:auto;line-height:28px;}
+.side-menu-list li a {height:28px;display:block;color:#000;width:auto;margin:0 4px;text-indent:0;letter-spacing:0.2em;}
+.side-menu-list li a:hover {background-color:#666;}
+.side-menu-list li a:hover,
+.side-menu-list li.active a {color:#fff;background:url(../images/menu_a_bg.png) no-repeat;}
 
 .navbar .nav .divider-vertical {
   background-color: #2b3741;
