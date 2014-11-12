@@ -62,6 +62,25 @@
   </div>
 </div>
 
+<!-- style -->
+<%- Loader('/public/stylesheets/index_edit.min.css')
+  .css('/public/libs/code-prettify/prettify.css')
+  .css('/public/stylesheets/responsive.css')
+  .css('/public/stylesheets/jquery.atwho.css')
+  .css('/public/libs/editor/editor.css')
+  .css('/public/libs/webuploader/webuploader.css')
+  .done(assets, config.site_static_host, config.mini_assets)
+%>
+<%- Loader('/public/index_edit.min.js')
+  .js('/public/libs/code-prettify/prettify.js')
+  .js('/public/libs/lodash.compat.js')
+  .js('/public/libs/jquery-ujs.js')
+  .js('/public/libs/jquery.caret.js')
+  .js('/public/libs/jquery.atwho.js')
+  .js('/public/javascripts/main.js')
+  .js('/public/javascripts/responsive.js')
+  .done(assets, config.site_static_host, config.mini_assets)
+%>
 <!-- markdown editor -->
 <%- Loader('/public/editor.min.js')
 .js('/public/libs/marked.js')
