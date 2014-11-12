@@ -39,7 +39,7 @@ module.exports = function (app) {
   } else {
     app.get('/signup', configMiddleware.github, passport.authenticate('github'));  // 进行github验证
   }
-  app.post('/signout', sign.signout);  // 登出
+  app.get('/signout', sign.signout);  // 登出
   app.get('/signin', sign.showLogin);  // 进入登录页面
   app.post('/signin', sign.login);  // 登录校验
   app.get('/active_account', sign.active_account);  //帐号激活
