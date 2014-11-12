@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var utility = require('utility');
 var mcache = require('memory-cache');
+var config = require('../config');
 
 var UserSchema = new Schema({
   name: { type: String},
@@ -51,7 +52,7 @@ UserSchema.virtual('isAdvanced').get(function () {
 });
 
 UserSchema.virtual('is_admin').get(function () {
-  return this.name == 'cuocuo';
+  return this.name == config.adminName;
 });
 
 UserSchema.index({name: 1});
