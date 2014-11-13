@@ -778,37 +778,6 @@ textarea#title {
   vertical-align: baseline;
 }
 
-/* custom bootstrap */
-.navbar {
-  margin-bottom: 0px;
-  z-index: 9;
-  width: 100%;
-  position: relative;
-  background: @node_black;
-  font-size: 13px;
-}
-
-.navbar-inner {
-  background: none;
-  border-radius: 0px;
-  border: none;
-  box-shadow: none;
-  width: 1000px;
-  margin: auto;
-}
-
-.navbar .container {
-  width: 100%;
-  margin: 0px auto;
-}
-
-.navbar .logo {
-  float: left;
-  position: absolute;
-  margin: 0 0 0 -17px;
-  padding: 0 17px;
-  background: url(../images/logo_bg.png) no-repeat center bottom;
-}
 
 .side-menu-top {
   width:1000px;
@@ -829,45 +798,6 @@ textarea#title {
 .side-menu-list li a:hover {background-color:#666;}
 .side-menu-list li a:hover,
 .side-menu-list li.active a {color:#fff;background:url(../images/menu_a_bg.png) no-repeat;}
-
-.navbar .nav .divider-vertical {
-  background-color: #2b3741;
-  border-right: 1px solid #2f3b46;
-}
-
-.navbar .nav > li > a {
-  text-shadow: none;
-  color: #cccccc;
-  &:hover {
-    color: #fff;
-  }
-}
-
-.form-actions {
-  border-top: none;
-  background-color: white;
-}
-
-.btn {
-  padding: 3px 14px;
-}
-
-.breadcrumb {
-  padding: 0px;
-  margin: 0px;
-  border: none;
-  background: none;
-  box-shadow: none;
-}
-
-.nav-pills {
-  margin: 0px 0px 10px 0px;
-}
-
-.nav-pills > li > a {
-  padding: 2px 10px;
-  line-height: 22px;
-}
 
 .pagination {
   height: 40px;
@@ -1225,7 +1155,7 @@ textarea.editor {
   color: white !important;
 }
 
-
+/* tags start */
 #tags {
   float: right;
   margin: 10px 0 20px 10px;
@@ -1244,8 +1174,6 @@ textarea.editor {
   font-size: 12px;
 }
 .t-h3 {
-  height: 32px;
-  line-height: 32px;
   padding: 15px 10px 0;
   font-size: 14px;
 }
@@ -1281,3 +1209,33 @@ ul.inline>li, ol.inline>li {
   color: #fff;
   white-space: nowrap;
 }
+/* tags end */
+
+
+/* nav start */
+.navbar {
+  margin-bottom: 60px;
+  min-height: 40px;
+}
+.container-fluid {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+}
+.first-ul {
+  margin-left: 230px;
+}
+.navbar-brand {
+  padding: 0 17px;
+  position: absolute;
+  height: 76px;
+  background: url(../images/logo_bg.png) no-repeat center bottom;
+}
+.navbar-nav>li>a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar .dropdown-menu {
+  text-align: right;
+}
+/* nav end */
