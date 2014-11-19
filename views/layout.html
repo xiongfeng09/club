@@ -20,7 +20,7 @@
   <% } %>
 
   <!-- style -->
-  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
   <%- Loader('/public/stylesheets/index.min.css')
   .css('/public/stylesheets/style.less')
   //.css('/public/stylesheets/common.css')
@@ -29,7 +29,7 @@
   <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
   <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-  <script src="http://cdn.bootcss.com/bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <% if (typeof(topic) !== 'undefined') { %>
   <title><%= topic.title %> - <%= config.name %></title>
   <% } else if (typeof(pageTitle) !== 'undefined') { %>
@@ -43,52 +43,51 @@
   <meta property="wb:webmaster" content="27df391315f023b0" />
 </head>
 <body>
-<!-- navbar -->
-<div class='navbar'>
-  <div class='navbar-inner'>
-    <div class='container'>
-      <h1 class="logo">
-        <a href='/'>
+
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href='/'>
           <% if (config.site_logo) {%>
             <img src="<%- staticFile(config.site_logo) %>" />
           <%} else {%>
             <%- config.name %>
           <%}%>
         </a>
-      </h1>
-     
+    </div>
 
-      <ul class='nav pull-right'>
+    <ul class="nav navbar-nav first-ul">
+      <li><a href='/'>首页</a></li>
+    </ul>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
         <% if (typeof(current_user) !== 'undefined'){ %>
-          <li>
-              <a href='/my/messages'>
-                <% if (current_user.messages_count) { %>
-                  <span class='big messages_count'><%= current_user.messages_count %></span>
-                <% } %>
-                通知
-              </a>
+          <li class="dropdown">
+            <a href="/user/<%=current_user.loginname%>/topics" class="dropdown-toggle" data-toggle="dropdown">
+              <% if (current_user.messages_count) { %>
+                <span class='big messages_count'>
+                  <%= current_user.messages_count %>
+                </span>
+              <% } %>
+              <%=current_user.loginname%>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/user/<%=current_user.loginname%>/topics">我的文章</a></li>
+              <li><a href="/my/messages">通知</a></li>
+              <li><a href="/setting">设置</a></li>
+              <li><a href="/signout">退出</a></li>
+            </ul>
           </li>
-          <li>
-            <a href='/signout' data-method="post" rel="nofollow">退出</a>
-          </li>
-        <% } else { %>
+         <% } else { %>
           <li><a href='/signup'>注册</a></li>
           <li><a href='/signin'>登录</a></li>
         <% } %>
       </ul>
     </div>
   </div>
-</div>
-
-<div class="side-menu-top">
-  <ul class="side-menu-list">            
-      <li><a href="/" >首页</a></li>
-      <% if (typeof(current_user) !== 'undefined'){ %>
-        <li><a href="/user/<%=current_user.loginname%>/topics">文章</a></li>
-        <li><a href='/setting'>设置</a></li>
-      <% } %>
-  </ul>
-</div> 
+</nav>
 
 <div id='main'>
   <%- body %>
