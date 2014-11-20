@@ -29,6 +29,8 @@ var config = require('./config');
 module.exports = function (app) {
   // home page
   app.get('/', site.index);
+  //hotkeys
+  app.get('/tools/hotkey', tools.hotkey);
   // sitemap
   app.get('/sitemap.xml', site.sitemap);
 

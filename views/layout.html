@@ -29,6 +29,7 @@
   <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
   <% if (typeof(topic) !== 'undefined') { %>
   <title><%= topic.title %> - <%= config.name %></title>
   <% } else if (typeof(pageTitle) !== 'undefined') { %>
@@ -74,7 +75,10 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="/user/<%=current_user.loginname%>/topics">我的文章</a></li>
-              <li><a href="/my/messages">通知</a></li>
+              <li>
+                <a href="/my/messages">
+                通知<%= (current_user.messages_count) ? '(' + current_user.messages_count + ')' : ""  %></a>
+              </li>
               <li><a href="/setting">设置</a></li>
               <li><a href="/signout">退出</a></li>
             </ul>
