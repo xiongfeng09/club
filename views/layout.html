@@ -58,6 +58,10 @@
 
     <ul class="nav navbar-nav first-ul">
       <li><a href='/'>首页</a></li>
+      <% if (typeof(current_user) !== 'undefined'){ %>
+        <li><a href="/user/<%=current_user.loginname%>/topics">我的文章</a></li>
+      <% } %>
+      <li><a href='/tools/hotkey'>常用快捷键</a></li>
     </ul>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -74,7 +78,6 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="/user/<%=current_user.loginname%>/topics">我的文章</a></li>
               <li>
                 <a href="/my/messages">
                 通知<%= (current_user.messages_count) ? '(' + current_user.messages_count + ')' : ""  %></a>
