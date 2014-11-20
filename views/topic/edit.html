@@ -35,9 +35,9 @@
             id="tab-value" value="<%=(typeof(tab) === 'undefined') ? "" : tab %>"/>
             <br/>
             <span class="tab-selector">标题：</span>
-            <textarea autofocus class='span9' id='title' name='title' rows='1'
-                      placeholder="标题字数 10 字以上"
-                    ><%= typeof(title) !== 'undefined' && title || '' %></textarea>
+            <input class='span9' id='title' name='title'
+              placeholder="标题字数 10 字以上"
+            ><%= typeof(title) !== 'undefined' && title || '' %></input>
 
             <div class='markdown_editor in_editor'>
               <div class='markdown_in_editor'>
