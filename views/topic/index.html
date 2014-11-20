@@ -366,6 +366,7 @@
     var replyId = $this.closest('.reply_area').attr('reply_id');
     $.ajax({
       url: '/reply/' + replyId + '/up',
+      data: { _csrf: $('#_csrf').val() },
       method: 'POST',
     }).done(function (data) {
       if (data.success) {
