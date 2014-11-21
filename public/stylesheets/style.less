@@ -699,67 +699,7 @@ img.unread {
   max-height: 40px;
 }
 
-/* markdown editor */
-.markdown-text p, .preview p {
-  white-space: pre-wrap; /* CSS3 */
-  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-  white-space: -pre-wrap; /* Opera 4-6 */
-  white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word; /* Internet Explorer 5.5+ */
-  line-height: 2em;
-  margin: 1em 0;
-}
 
-.markdown-text > *:first-child, .preview > *:first-child {
-  margin-top: 0;
-}
-
-.markdown-text > *:last-child, .preview > *:last-child {
-  margin-bottom: 1em;
-}
-
-.markdown-text li, .preview li {
-  font-size: 14px;
-  line-height: 2em;
-}
-
-.markdown-text p code, .preview p code,
-.markdown-text li code, .preview li code {
-  color: black;
-  background-color: #fcfafa;
-  padding: 4px 6px;
-}
-
-.markdown-text pre.prettyprint,
-.preview pre.prettyprint {
-  /*margin: 0.5em -10px;*/
-}
-
-.preview {
-  padding: 0.5em;
-  font-size: 15px;
-  min-height: 200px;
-  word-break: break-all;
-}
-
-.preview p > img {
-  display: block;
-
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6);
-}
-
-.markdown_editor .markdown_in_preview,
-.markdown_editor .markdown_in_editor {
-  display: none;
-}
-
-.markdown_editor.in_preview .markdown_in_preview {
-  display: block;
-}
-
-.markdown_editor.in_editor .markdown_in_editor {
-  display: block;
-}
 
 textarea#title {
   width: 87%;
@@ -796,19 +736,6 @@ textarea#title {
 .side-menu-list li a:hover,
 .side-menu-list li.active a {color:#fff;background:url(../images/menu_a_bg.png) no-repeat;}
 
-.pagination {
-  height: 40px;
-  margin: 10px 0px 0px 10px;
-  ul {
-    box-shadow: none;
-  }
-}
-
-.pagination a {
-  line-height: 30px;
-  color: @gray2;
-}
-
 .topic_content {
   margin: 0 10px;
 }
@@ -820,7 +747,6 @@ textarea#title {
 .topic_content h1, .topic_content h2, .topic_content h3,
 .topic_content h4, .topic_content h5, .topic_content h6 {
   margin: 30px 0 15px 0;
-  border-bottom: 1px solid #eee;
 }
 
 .topic_content h1 {
@@ -1240,3 +1166,22 @@ ul.inline>li, ol.inline>li {
   margin: 0px;
 }
 /* nav end */
+
+/* mark start*/
+.markdown-text.hljs {
+  background: inherit;
+}
+/* mark end*/
+
+.pagination {
+  height: 40px;
+  margin: 10px 0px 0px 10px;
+  ul {
+    box-shadow: none;
+  }
+}
+
+.pagination a {
+  line-height: 30px;
+  color: @gray2;
+}

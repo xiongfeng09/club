@@ -1,3 +1,8 @@
+<%- Loader('/public/stylesheets/topic.index.min.css')
+  .css('/public/stylesheets/highlight/github.css')
+  .done(assets, config.site_static_host, config.mini_assets)
+%>
+
 <div id='sidebar'>
   <div class='panel'>
     <div class='header'>
@@ -12,7 +17,6 @@
     <%- partial('../_ads') %>
   <% } %>
 </div>
-
 <div id='content'>
   <div class='panel'>
     <div class='header topic_header'>
@@ -148,11 +152,12 @@
   <div class="anchor"></div>
 </div>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 
 <% if (typeof(current_user) !== 'undefined' && typeof(topic) !== 'undefined') { %>
 
-<%- Loader('/public/comment.min.js')
-    .js('/public/libs/lodash.compat.js')
+<%- Loader('/public/topic.index.min.js')
+  .js('/public/libs/lodash.compat.js')
 .done(assets, '', config.mini_assets)
 %>
 <script>
