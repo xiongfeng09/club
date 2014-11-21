@@ -35,9 +35,9 @@
             id="tab-value" value="<%=(typeof(tab) === 'undefined') ? "" : tab %>"/>
             <br/>
             <span class="tab-selector">标题：</span>
-            <input class='span9' id='title' name='title'
+            <input class='span9' id='title' name='title' value="<%= typeof(title) !== 'undefined' && title || '' %>"
               placeholder="标题字数 10 字以上"
-            ><%= typeof(title) !== 'undefined' && title || '' %></input>
+            />
 
             <div class='markdown_editor in_editor'>
               <div class='markdown_in_editor'>
@@ -64,9 +64,6 @@
 
 <script>
   (function () {
-    var editor = new Editor();
-    editor.render($('.editor')[0]);
-
     // 分类选择的检查，必须选择
     $('#create_topic_form').on('submit', function (e) {
       var tabValue = $('#tab-value').val();
