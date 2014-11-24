@@ -231,7 +231,7 @@ else
         
         var _DoItalicsAndBold = OPTIONS.asteriskIntraWordEmphasis ? _DoItalicsAndBold_AllowIntrawordWithAsterisk : _DoItalicsAndBoldStrict;
 
-        this.makeHtml = function (text) {
+        this.makeHtmlNature = function (text) {
 
             //
             // Main function. The order in which other subs are called here is
@@ -304,6 +304,9 @@ else
 
             return text;
         };
+        this.makeHtml = function (text) {
+            return marked(text);
+        }
 
         function _StripLinkDefinitions(text) {
             //
