@@ -41,36 +41,30 @@
             />
             <div class="wmd-panel">
                 <div id="wmd-button-bar"></div>
-                <textarea class="wmd-input" id="wmd-input">
-                  <%= typeof(content) !== 'undefined' && content || '' %>
-                </textarea>
-            </div>
-            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-
-
-            <div class='markdown_editor in_editor'>
-              <div class='markdown_in_editor'>
-                <textarea class='editor' name='t_content' rows='20'
-                          placeholder='文章支持 Markdown 语法, 请注意标记代码'
-                        ><%= typeof(content) !== 'undefined' && content || '' %></textarea>
-
-                <div class='editor_buttons'>
-                  <input type="submit" class='span-primary submit_btn' data-loading-text="提交中"
-                         value="提交">
+                <div class="wmd-content">
+                  <textarea class="wmd-input editor" id="wmd-input" name='t_content' rows='20'
+                            placeholder='文章支持 Markdown 语法, 请注意标记代码'><%= typeof(content) !== 'undefined' && content || '' %>
+                  </textarea>
+                  <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                  <a href='javascript:;' class='preview-button'>预览</a>
                 </div>
-              </div>
-
             </div>
+            
 
             <input type='hidden' id='topic_tags' name='topic_tags' value=''>
             <input type='hidden' name='_csrf' value='<%= csrf %>'>
+            <div class='editor_buttons'>
+              <input type="submit" class='span-primary submit_btn' data-loading-text="提交中"
+                     value="提交">
+            </div>
           </fieldset>
         </form>
     </div>
     <% } %>
   </div>
 </div>
-        
+
+<script type="text/javascript" src="/public/javascripts/editor/marked.js"></script>    
 <script type="text/javascript" src="/public/javascripts/editor/Markdown.Converter.js"></script>
 <script type="text/javascript" src="/public/javascripts/editor/Markdown.Sanitizer.js"></script>
 <script type="text/javascript" src="/public/javascripts/editor/Markdown.Editor.js"></script>
@@ -86,6 +80,12 @@
         return false;
       }
     });
+
+    $('.preview-button').on('click', function (e) {
+      var preview = $('#wmd-preview')
+      if (preview.css('display') == 'none') preview.show();
+      else preview.hide();
+    })
     // END 分类选择的检查，必须选择
   })();
 </script>
