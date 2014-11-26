@@ -21,17 +21,22 @@
 	right: 15px;
 	text-decoration: none;
 }
-.wmd-preview 
+.wmd-preview
 {
 	padding: 5px;
 	border: 1px solid DarkGray;
-	height: 380px;
+	height: 400px;
+	width: 100%;
 	overflow: auto;
 	position: absolute;
 	left: 0;
 	top: 0;
 	display: none;
 	background-color: #fff;
+}
+.wmd-preview img
+{
+	max-width: 98%;
 }
 
 .wmd-button-row 
