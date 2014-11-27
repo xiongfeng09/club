@@ -26,6 +26,7 @@
       </div>
       <% }else{ %>
       <% if (typeof(action) !== 'undefined' && action === 'edit') { %>
+     
       <form id='create_topic_form' action='/topic/<%= topic_id %>/edit' method='post'>
         <% } else { %>
         <form id='create_topic_form' action='/topic/create' method='post'>
@@ -102,5 +103,31 @@
         var editor1 = new Markdown.Editor(converter1);
         
         editor1.run();
+
+        $('body').on("change", "#image-file", function () {
+          var iframe = $('<iframe name="postiframe" id="postiframe" style="display: none"></iframe>');
+
+          $("body").append(iframe);
+
+          var form = $('#theuploadform');
+          form.attr("action", "/upload");
+          form.attr("method", "post");
+
+          form.attr("encoding", "multipart/form-data");
+          form.attr("enctype", "multipart/form-data");
+
+          form.attr("target", "postiframe");
+          form.attr("file", $('#userfile').val());
+          form.submit();
+            
+          $("#postiframe").load(function () {
+              var iframeContents = this.contentWindow.document.body.innerHTML;
+              var text = $(iframeContents).text()
+              var url = $.parseJSON(text).url
+              $("#img-url").val(url);
+          });
+
+          return false;
+        });
     })();
 </script>
