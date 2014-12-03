@@ -411,9 +411,7 @@ exports.de_collect = function (req, res, next) {
 };
 
 exports.upload = function (req, res, next) {
-  console.log(1)
   req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
-    console.log(2)
       store.upload(file, {filename: filename}, function (err, result) {
         if (err) {
           return next(err);

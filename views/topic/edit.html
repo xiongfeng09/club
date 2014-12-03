@@ -20,6 +20,12 @@
         <strong><%= edit_error %></strong>
       </div>
       <% } %>
+<!--       <form method="post" action="/upload" enctype="multipart/form-data">
+        <input type='file'/>
+        <input type='hidden' name='_csrf' value='<%= csrf %>'/>
+        <input type="submit" value ='post'/>
+      </form> -->
+
       <% if(typeof(error) !== 'undefined' && error){ %>
       <div class="alert alert-error">
         <strong><%= error %></strong>
@@ -117,6 +123,7 @@
           form.attr("enctype", "multipart/form-data");
 
           form.attr("target", "postiframe");
+          form.attr("_csrf", '<%= csrf %>')
           form.attr("file", $('#userfile').val());
           form.submit();
             

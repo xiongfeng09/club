@@ -79,7 +79,7 @@ app.use(auth.blockUser());
 app.use(Loader.less(__dirname));
 app.use('/public', express.static(staticDir));
 
-if (!config.debug) {
+if (config.debug) {
   app.use(csurf());
   app.set('view cache', false);
 }
